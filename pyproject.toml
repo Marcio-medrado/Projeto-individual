@@ -1,3 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = 'taia-lab'
-version = '0.1.0'
+name = "taia-lab"
+version = "0.1.0"
+description = "Laboratório didático de TAIA: pipelines, experimentos (YAML) e tracking (MLflow)."
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "pyyaml",
+  "torch",
+  "scikit-learn",
+  "mlflow",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["taia_lab*"]

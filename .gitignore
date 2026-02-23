@@ -1,15 +1,23 @@
-.venv/
+# Python
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Mac
 .DS_Store
-models/*
-reports/*
+
+# MLflow (experimentos locais)
+models/
+reports/
+mlruns/
 data/raw/*
 data/processed/*
 
+# Ambientes
+.venv/
+venv/
 !models/.gitkeep
 !reports/.gitkeep
 !data/raw/.gitkeep
 !data/processed/.gitkeep
-
-# MLflow (experimentos locais)
-mlruns/*

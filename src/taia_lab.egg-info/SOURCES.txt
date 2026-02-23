@@ -4,6 +4,7 @@ src/taia_lab/__init__.py
 src/taia_lab.egg-info/PKG-INFO
 src/taia_lab.egg-info/SOURCES.txt
 src/taia_lab.egg-info/dependency_links.txt
+src/taia_lab.egg-info/requires.txt
 src/taia_lab.egg-info/top_level.txt
 src/taia_lab/pipelines/minimal_pipeline.py
 src/taia_lab/pipelines/run_experiment.py

@@ -22,8 +22,13 @@ model:
 
 tracking:
   tool: mlflow
-  experiment_name: taia-aula03
+  experiment_name: taia_aula03
   tags:
-    aula: aula03
-    purpose: compare_lr
-    changed_param: lr
+    aula: "03"
+    variant: lr_sweep
+    changed_param: "train.lr"
+    hypothesis: "lr menor pode melhorar estabilidade e generalização"
+
+runtime:
+  deterministic: true
+  device_preference: auto   # auto|cuda|mps|cpu

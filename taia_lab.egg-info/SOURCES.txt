@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+taia_lab.egg-info/PKG-INFO
+taia_lab.egg-info/SOURCES.txt
+taia_lab.egg-info/dependency_links.txt
+taia_lab.egg-info/requires.txt
+taia_lab.egg-info/top_level.txt
+tests/test_sanity.py
