@@ -185,7 +185,12 @@ def train_model(
     """Treinamento: loop treino/val (com logging de métricas por época)."""
     model = TinyMLP(cfg.n_features, cfg.hidden_dim, cfg.n_classes).to(device)
     loss_fn = nn.CrossEntropyLoss()
-    opt = torch.optim.Adam(model.parameters(), lr=cfg.lr)
+    # Caso exista cfg.weight_decay, ele será aplicado aqui (L2 regularization)
+    if hasattr(cfg, "weight_decay") and cfg.weight_decay is not None:
+        opt = torch.optim.Adam(model.parameters(), lr=cfg.lr, weight_decay=cfg.weight_decay)
+    else:
+        opt = torch.optim.Adam(model.parameters(), lr=cfg.lr)
+
 
     last = {"train_loss": float("nan"), "val_loss": float("nan"), "val_acc": float("nan")}
 

@@ -1,11 +1,10 @@
 experiment:
-  name: exp04_credit_pipeline
+  name: exp06_decay_pipeline
   description: >
-    Execução de um pipeline supervisionado completo:
-    ingestão de dados -> preparação -> treinamento -> avaliação ->
-    registro do modelo e métricas -> versionamento de artefatos.
-    Demonstra a operacionalização do fluxo de ML dentro de uma
-    estrutura rastreável.
+    Execução de um pipeline supervisionado completo da aula 04, 
+    com a adição do weight decay no otimizador.
+    O objetivo é demonstrar a operacionalização do weight decay
+    em um pipeline de ML dentro de uma estrutura rastreável.
 
 data:
   seed: 42
@@ -17,6 +16,7 @@ train:
   epochs: 20
   batch_size: 64
   lr: 0.001
+  weight_decay: 1e-5
 
 model:
   hidden_dim: 64
@@ -24,12 +24,12 @@ model:
 
 tracking:
   tool: mlflow
-  experiment_name: taia_pipeline
+  experiment_name: taia_decay_pipeline
   tags:
     aula: "06"
     pipeline: supervised
     run_type: pipeline
-    purpose: operational_flow
+    purpose: weight_decay_flow
     dataset: synthetic_credit
 
 runtime:

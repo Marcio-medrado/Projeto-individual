@@ -1,0 +1,35 @@
+experiment:
+  name: exp06_dropout_pipeline
+  description: >
+    Execução de um pipeline supervisionado completo da aula 04, 
+    agora com a adição de dropout.
+
+data:
+  seed: 42
+  n_samples: 1500
+  n_features: 5
+  test_size: 0.3
+
+train:
+  epochs: 20
+  batch_size: 64
+  lr: 0.001
+
+model:
+  hidden_dim: 64
+  n_classes: 2
+  dropout: 0.2
+
+tracking:
+  tool: mlflow
+  experiment_name: taia_dropout_pipeline
+  tags:
+    aula: "05"
+    pipeline: supervised
+    run_type: pipeline
+    purpose: dropout_pipeline
+    dataset: synthetic_credit
+
+runtime:
+  deterministic: true
+  device_preference: auto   # auto|cuda|mps|cpu
