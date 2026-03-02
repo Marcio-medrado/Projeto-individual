@@ -1,0 +1,41 @@
+experiment:
+  name: exp07_baseline_cnn
+  description: >
+    Baseline justo para Transfer Learning: mesma arquitetura (MobileNetV3-Small),
+    porém treinada do zero (pretrained=false). Serve como referência para comparar
+    ganho de convergência e generalização quando se usa pesos pré-treinados.
+
+data:
+  dataset: cifar10
+  data_dir: data
+  seed: 42
+  val_split: 0.2
+  num_workers: 2
+  image_size: 224
+
+train:
+  epochs: 8
+  batch_size: 64
+  lr: 0.001
+  weight_decay: 1e-4
+
+model:
+  strategy: baseline
+  backbone: mobilenet_v3_small
+  pretrained: false
+  finetune_layers: 0
+  n_classes: 10
+
+tracking:
+  tool: mlflow
+  experiment_name: taia_transfer
+  tags:
+    aula: "07"
+    run_type: pipeline
+    topic: transfer_learning
+    strategy: baseline
+    dataset: cifar10
+
+runtime:
+  deterministic: true
+  device_preference: auto # auto|cuda|mps|cpu

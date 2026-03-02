@@ -1,0 +1,41 @@
+experiment:
+  name: exp07_tl_feature_extraction
+  description: >
+    Transfer Learning com MobileNetV3-Small pré-treinada (ImageNet),
+    congelando o backbone e treinando apenas a cabeça (classificador).
+    Objetivo: ganho rápido de desempenho com baixo custo e menor risco de overfitting.
+
+data:
+  dataset: cifar10
+  data_dir: data
+  seed: 42
+  val_split: 0.2
+  num_workers: 2
+  image_size: 224
+
+train:
+  epochs: 8
+  batch_size: 64
+  lr: 0.001
+  weight_decay: 1e-4
+
+model:
+  strategy: feature_extraction
+  backbone: mobilenet_v3_small
+  pretrained: true
+  finetune_layers: 0
+  n_classes: 10
+
+tracking:
+  tool: mlflow
+  experiment_name: taia_transfer
+  tags:
+    aula: "07"
+    run_type: pipeline
+    topic: transfer_learning
+    strategy: feature_extraction
+    dataset: cifar10
+
+runtime:
+  deterministic: true
+  device_preference: mps # auto|cuda|mps|cpu

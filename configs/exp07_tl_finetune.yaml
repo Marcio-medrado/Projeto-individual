@@ -1,0 +1,41 @@
+experiment:
+  name: exp07_tl_finetune
+  description: >
+    Transfer Learning com fine-tuning parcial: MobileNetV3-Small pré-treinada (ImageNet),
+    com backbone parcialmente descongelado (últimos blocos) + classificador treinável.
+    Objetivo: maior adaptação ao domínio alvo, mantendo custo controlado.
+
+data:
+  dataset: cifar10
+  data_dir: data
+  seed: 42
+  val_split: 0.2
+  num_workers: 2
+  image_size: 224
+
+train:
+  epochs: 8
+  batch_size: 64
+  lr: 0.0005
+  weight_decay: 1e-4
+
+model:
+  strategy: finetune
+  backbone: mobilenet_v3_small
+  pretrained: true
+  finetune_layers: 3
+  n_classes: 10
+
+tracking:
+  tool: mlflow
+  experiment_name: taia_transfer
+  tags:
+    aula: "07"
+    run_type: pipeline
+    topic: transfer_learning
+    strategy: finetune
+    dataset: cifar10
+
+runtime:
+  deterministic: true
+  device_preference: mps # auto|cuda|mps|cpu
