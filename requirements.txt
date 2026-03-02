@@ -5,3 +5,9 @@ torch
 torchvision
 mlflow
 pyyaml
+opencv-python
+matplotlib
+seaborn
+Pillow
+ipywidgets
+requests

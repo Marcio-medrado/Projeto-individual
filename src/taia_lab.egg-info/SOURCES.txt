@@ -8,7 +8,11 @@ src/taia_lab.egg-info/requires.txt
 src/taia_lab.egg-info/top_level.txt
 src/taia_lab/pipelines/minimal_pipeline.py
 src/taia_lab/pipelines/run_experiment.py
+src/taia_lab/pipelines/run_supervised_pipeline.py
+src/taia_lab/pipelines/run_transfer_pipeline.py
+src/taia_lab/pipelines/supervised_pipeline.py
 src/taia_lab/pipelines/tracked_pipeline.py
+src/taia_lab/pipelines/transfer_pipeline.py
 src/taia_lab/utils/paths.py
 src/taia_lab/utils/seed.py
 tests/test_sanity.py
