@@ -1,4 +1,4 @@
-.PHONY: help install mlflow-ui clean exp01 exp02 exp03 exp04 exp06a exp06b exp06c
+.PHONY: help install mlflow-ui clean exp01 exp02 exp03 exp04 exp06a exp06b exp06c exp07a exp07b exp07c
 
 ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 STAMP_DIR := $(ROOT)/.stamps
@@ -16,6 +16,9 @@ help:
 	@echo "  exp06a     - roda variação de early stopping (incremental via stamp)"
 	@echo "  exp06b     - roda variação de dropout (incremental via stamp)"
 	@echo "  exp06c     - roda variação de weight decay (incremental via stamp)"
+	@echo "  exp07a     - roda baseline CNN (incremental via stamp)"
+	@echo "  exp07b     - roda feature extraction (incremental via stamp)"
+	@echo "  exp07c     - roda fine-tune (incremental via stamp)"
 	@echo "  mlflow-ui  - abre MLflow UI (local)"
 	@echo "  clean      - remove outputs (models/reports/mlruns/.stamps)"
 
@@ -36,6 +39,9 @@ exp04: $(STAMP_DIR)/exp04_pipeline.ok
 exp06a: $(STAMP_DIR)/exp06_early_stopping.ok 
 exp06b: $(STAMP_DIR)/exp06_dropout.ok 
 exp06c: $(STAMP_DIR)/exp06_decay.ok
+exp07a: $(STAMP_DIR)/exp07_baseline_cnn.ok
+exp07b: $(STAMP_DIR)/exp07_tl_feature_extraction.ok
+exp07c: $(STAMP_DIR)/exp07_tl_finetune.ok
 
 $(STAMP_DIR)/exp01_baseline.ok: $(CONFIG_DIR)/exp01_baseline.yaml $(RUNNER) $(SEEDPY)
 	@mkdir -p $(STAMP_DIR)
@@ -71,3 +77,19 @@ $(STAMP_DIR)/exp06_dropout.ok: $(CONFIG_DIR)/exp06_dropout_pipeline.yaml $(RUNNE
 	@mkdir -p $(STAMP_DIR)
 	cd $(ROOT) && python -m taia_lab.pipelines.run_supervised_pipeline --config configs/exp06_dropout_pipeline.yaml
 	@touch $@
+
+$(STAMP_DIR)/exp07_baseline_cnn.ok: $(CONFIG_DIR)/exp07_baseline_cnn.yaml $(RUNNER) $(SEEDPY)
+	@mkdir -p $(STAMP_DIR)
+	cd $(ROOT) && python -m taia_lab.pipelines.run_transfer_pipeline --config configs/exp07_baseline_cnn.yaml
+	@touch $@
+
+$(STAMP_DIR)/exp07_tl_feature_extraction.ok: $(CONFIG_DIR)/exp07_tl_feature_extraction.yaml $(RUNNER) $(SEEDPY)
+	@mkdir -p $(STAMP_DIR)
+	cd $(ROOT) && python -m taia_lab.pipelines.run_transfer_pipeline --config configs/exp07_tl_feature_extraction.yaml
+	@touch $@
+
+$(STAMP_DIR)/exp07_tl_finetune.ok: $(CONFIG_DIR)/exp07_tl_finetune.yaml $(RUNNER) $(SEEDPY)
+	@mkdir -p $(STAMP_DIR)
+	cd $(ROOT) && python -m taia_lab.pipelines.run_transfer_pipeline --config configs/exp07_tl_finetune.yaml
+	@touch $@
+
