@@ -11,6 +11,7 @@ __pycache__/
 models/
 reports/
 mlruns/
+data/
 data/raw/*
 data/processed/*
 
