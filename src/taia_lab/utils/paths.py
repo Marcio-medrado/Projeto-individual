@@ -1,6 +1,6 @@
+from __future__ import annotations
 from pathlib import Path
 
-from __future__ import annotations
 
 def project_root() -> Path:
     """Detecta a raiz do projeto (presença de pyproject.toml ou .git)."""
