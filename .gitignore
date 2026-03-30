@@ -16,6 +16,7 @@ data/raw/*
 data/processed/*
 data/cifar-10-batches-py/*
 data/cifar-10-python.tar.gz
+src/taia_lab.egg-info
 
 # Ambientes
 .venv/

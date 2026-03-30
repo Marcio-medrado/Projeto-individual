@@ -3,7 +3,7 @@ pandas
 scikit-learn
 torch
 torchvision
-mlflow
+mlflow==3.8.1
 pyyaml
 opencv-python
 matplotlib
