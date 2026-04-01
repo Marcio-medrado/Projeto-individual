@@ -1,4 +1,4 @@
-.PHONY: help install mlflow-ui clean exp01 exp02 exp03 exp04 exp06a exp06b exp06c exp07a exp07b exp07c
+.PHONY: help install mlflow-ui clean exp01 exp02 exp03 exp04 exp04_1 exp06a exp06b exp06c exp07a exp07b exp07c
 
 ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 STAMP_DIR := $(ROOT)/.stamps
@@ -13,6 +13,7 @@ help:
 	@echo "  exp02      - roda variação de lr (incremental via stamp)"
 	@echo "  exp03      - roda hidden_dim=128 (incremental via stamp)"
 	@echo "  exp04      - roda pipeline completo (incremental via stamp)"
+	@echo "  exp04_1    - roda pipeline com hidden_dim=128 (incremental via stamp)"
 	@echo "  exp06a     - roda variação de early stopping (incremental via stamp)"
 	@echo "  exp06b     - roda variação de dropout (incremental via stamp)"
 	@echo "  exp06c     - roda variação de weight decay (incremental via stamp)"
@@ -36,6 +37,7 @@ exp01: $(STAMP_DIR)/exp01_baseline.ok
 exp02: $(STAMP_DIR)/exp02_lr002.ok
 exp03: $(STAMP_DIR)/exp03_hidden128.ok
 exp04: $(STAMP_DIR)/exp04_pipeline.ok
+exp04_1: $(STAMP_DIR)/exp04.1_pipeline.ok
 exp06a: $(STAMP_DIR)/exp06_early_stopping.ok 
 exp06b: $(STAMP_DIR)/exp06_dropout.ok 
 exp06c: $(STAMP_DIR)/exp06_decay.ok
@@ -61,6 +63,11 @@ $(STAMP_DIR)/exp03_hidden128.ok: $(CONFIG_DIR)/exp03_hidden128.yaml $(RUNNER) $(
 $(STAMP_DIR)/exp04_pipeline.ok: $(CONFIG_DIR)/exp04_pipeline.yaml $(RUNNER) $(SEEDPY)
 	@mkdir -p $(STAMP_DIR)
 	cd $(ROOT) && python -m taia_lab.pipelines.run_supervised_pipeline --config configs/exp04_pipeline.yaml
+	@touch $@
+
+$(STAMP_DIR)/exp04.1_pipeline.ok: $(CONFIG_DIR)/exp04.1_pipeline.yaml $(RUNNER) $(SEEDPY)
+	@mkdir -p $(STAMP_DIR)
+	cd $(ROOT) && python -m taia_lab.pipelines.run_supervised_pipeline --config configs/exp04.1_pipeline.yaml
 	@touch $@
 	
 $(STAMP_DIR)/exp06_decay.ok: $(CONFIG_DIR)/exp06_decay_pipeline.yaml $(RUNNER) $(SEEDPY)
